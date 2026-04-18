@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Krath Veil — Tactical Mesh Communications</title>
-  <meta name="description" content="LoRa-based mesh networking for India's paramilitary ground forces. Pre-launch." />
+  <meta name="description" content="Tactical mesh communications for India's paramilitary ground forces. Pre-launch." />
   <meta property="og:title" content="Krath Veil — Tactical Mesh Communications" />
-  <meta property="og:description" content="LoRa-based mesh networking for India's paramilitary ground forces. Pre-launch." />
+  <meta property="og:description" content="Tactical mesh communications for India's paramilitary ground forces. Pre-launch." />
   <meta property="og:image" content="logo.jpg" />
   <meta property="og:type" content="website" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23C9B06B'/></svg>" />
@@ -47,23 +47,38 @@
       to { opacity: 1; }
     }
 
+    /* Top classification stripe */
+    body::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 3px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
     main {
       max-width: 720px;
       margin: 0 auto;
-      padding: 80px 24px 60px;
+      padding: 72px 24px 60px;
     }
 
     /* Logo */
     .logo-wrap {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
+      /* isolate so blend mode works against page bg only */
+      isolation: auto;
     }
 
     .logo-wrap img {
       width: 100%;
-      max-width: 320px;
+      max-width: 520px;
       height: auto;
       display: inline-block;
+      /* push logo's gray bg to near-black, keep gold vivid */
+      filter: contrast(1.7);
+      mix-blend-mode: screen;
     }
 
     /* Tagline */
@@ -71,10 +86,10 @@
       text-align: center;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.28em;
       color: var(--gold);
       text-transform: uppercase;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     /* One-liner */
@@ -84,7 +99,7 @@
       font-weight: 400;
       color: var(--text);
       line-height: 1.5;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     /* Status badge */
@@ -93,7 +108,7 @@
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.22em;
-      color: var(--gold);
+      color: var(--text-dim);
       text-transform: uppercase;
       margin-bottom: 40px;
     }
@@ -184,8 +199,8 @@
     <hr />
 
     <ul class="capabilities">
-      <li>LoRa-based mesh networking for paramilitary ground forces.</li>
-      <li>ATAK-integrated situational awareness for the dismounted soldier.</li>
+      <li>Tactical mesh communications for paramilitary ground forces.</li>
+      <li>Real-time situational awareness for the dismounted soldier.</li>
       <li>Built for BSF, CRPF, and NDRF operations in cellular dead-zones.</li>
     </ul>
 
