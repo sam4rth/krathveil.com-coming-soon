@@ -3,217 +3,557 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Krath Veil — Tactical Mesh Communications</title>
-  <meta name="description" content="Tactical mesh communications for India's paramilitary ground forces. Pre-launch." />
-  <meta property="og:title" content="Krath Veil — Tactical Mesh Communications" />
-  <meta property="og:description" content="Tactical mesh communications for India's paramilitary ground forces. Pre-launch." />
+  <title>Krath Veil: The Battlefield Networking OS for India</title>
+  <meta name="description" content="KTAF turns any radio, drone, or sensor into one AI-coordinated, jam-resilient mesh. Indigenous, sovereign-controlled tactical communications. Pre-launch, 2026, Hyderabad, India." />
+  <meta name="theme-color" content="#060608" />
+  <link rel="canonical" href="https://krathveil.com/" />
+
+  <!-- Open Graph / social -->
+  <meta property="og:title" content="Krath Veil: The Battlefield Networking OS for India" />
+  <meta property="og:description" content="KTAF turns any radio, drone, or sensor into one AI-coordinated, jam-resilient mesh. Indigenous and sovereign-controlled. Pre-launch, 2026." />
   <meta property="og:image" content="logo.jpg" />
   <meta property="og:type" content="website" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23C9B06B'/></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <meta property="og:url" content="https://krathveil.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Krath Veil: The Battlefield Networking OS for India" />
+  <meta name="twitter:description" content="KTAF turns any radio, drone, or sensor into one AI-coordinated, jam-resilient mesh. Pre-launch, 2026." />
+  <meta name="twitter:image" content="logo.jpg" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23060608'/><rect x='5.5' y='5.5' width='21' height='21' fill='none' stroke='%23C9B06B' stroke-width='2'/><rect x='13' y='13' width='6' height='6' fill='%23C9B06B'/></svg>" />
+
   <style>
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0D0D0D;
-      --text: #EDEDED;
-      --text-dim: rgba(255, 255, 255, 0.55);
-      --text-body: rgba(255, 255, 255, 0.7);
-      --gold: #C9B06B;
-      --rule: rgba(255, 255, 255, 0.08);
+      /* Krath Veil palette: gold is the only accent */
+      --bg: #060608;        /* OLED-black canvas */
+      --bg-2: #0B0B0D;      /* lifted surfaces */
+      --oled: #000000;      /* the display panel */
+      --gold: #C9B06B;      /* Krath Gold */
+      --gold-2: #8A7440;    /* Gold Dark: rules, secondary */
+      --gold-soft: #E6D8AC; /* warm light gold, emphasis */
+      --text: #ECE6D6;      /* warm off-white, headings */
+      --body: rgba(236, 230, 214, 0.70);
+      --muted: #94907F;     /* captions, footers */
+      --rule: rgba(201, 176, 107, 0.16);
+      --rule-2: rgba(201, 176, 107, 0.34);
+      --serif: Georgia, 'Times New Roman', 'Noto Serif', serif;
+      --maxw: 940px;
     }
 
-    html, body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      min-height: 100vh;
-    }
+    html { -webkit-text-size-adjust: 100%; }
 
     body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.62;
+      min-height: 100vh;
+      overflow-x: hidden;
       opacity: 0;
-      animation: fadein 600ms ease forwards;
+      animation: boot 700ms ease forwards;
     }
+    @keyframes boot { to { opacity: 1; } }
 
-    @keyframes fadein {
-      to { opacity: 1; }
-    }
-
-    /* Top classification stripe */
+    /* Faint tactical coordinate grid behind everything */
     body::before {
       content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        repeating-linear-gradient(to right, rgba(201,176,107,0.05) 0 1px, transparent 1px 64px),
+        repeating-linear-gradient(to bottom, rgba(201,176,107,0.05) 0 1px, transparent 1px 64px);
+      opacity: 0.55;
+      mask-image: radial-gradient(circle at 50% 30%, #000 0%, rgba(0,0,0,0.35) 70%, transparent 100%);
+      -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, rgba(0,0,0,0.35) 70%, transparent 100%);
+    }
+
+    a { color: inherit; }
+
+    /* Classification stripe + sticky top bar */
+    .stripe { height: 3px; background: var(--gold); opacity: 0.7; position: relative; z-index: 3; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      background: rgba(6, 6, 8, 0.92);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px clamp(18px, 5vw, 40px);
+    }
+    .topbar .brand {
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .topbar .class {
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding-left: clamp(20px, 5vw, 40px); padding-right: clamp(20px, 5vw, 40px); position: relative; z-index: 1; }
+
+    /* ──────────────── HERO ──────────────── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: clamp(54px, 9vw, 104px) 0 clamp(40px, 7vw, 84px);
+    }
+
+    /* OLED display panel, recreates the node screen */
+    .oled-frame {
+      position: relative;
+      max-width: 620px;
+      margin: 0 auto clamp(34px, 5vw, 52px);
+      padding: clamp(14px, 2.4vw, 22px);
+      background: #0A0A0B;
+      border: 1px solid var(--rule);
+    }
+    /* HUD corner brackets */
+    .oled-frame::before, .oled-frame::after {
+      content: ''; position: absolute; width: 16px; height: 16px; pointer-events: none;
+    }
+    .oled-frame::before { top: -1px; left: -1px; border-top: 2px solid var(--gold); border-left: 2px solid var(--gold); }
+    .oled-frame::after  { bottom: -1px; right: -1px; border-bottom: 2px solid var(--gold); border-right: 2px solid var(--gold); }
+
+    .oled {
+      position: relative;
+      overflow: hidden;
+      background: var(--oled);
+      border: 1px solid rgba(201, 176, 107, 0.22);
+      padding: clamp(26px, 5vw, 48px) clamp(18px, 4vw, 40px);
+      box-shadow: 0 0 46px rgba(201, 176, 107, 0.06), inset 0 0 70px rgba(0, 0, 0, 0.9);
+    }
+    .oled img {
       display: block;
       width: 100%;
-      height: 3px;
-      background: var(--gold);
+      max-width: 460px;
+      height: auto;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 0 5px rgba(201, 176, 107, 0.30)) drop-shadow(0 0 16px rgba(201, 176, 107, 0.12));
+      animation: poweron 1100ms ease both;
+    }
+    @keyframes poweron {
+      0%   { opacity: 0; filter: brightness(2.4) drop-shadow(0 0 5px rgba(201,176,107,0.30)); }
+      18%  { opacity: 0.9; }
+      24%  { opacity: 0.35; }
+      40%  { opacity: 1; }
+      100% { opacity: 1; filter: drop-shadow(0 0 5px rgba(201,176,107,0.30)) drop-shadow(0 0 16px rgba(201,176,107,0.12)); }
+    }
+    /* dot-matrix pixel grid */
+    .oled::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 2; pointer-events: none;
+      background-image: radial-gradient(rgba(0,0,0,0.55) 38%, transparent 40%);
+      background-size: 4px 4px;
+      mix-blend-mode: multiply;
+      opacity: 0.55;
+    }
+    /* scanlines */
+    .oled::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.045) 0 1px, transparent 1px 3px);
       opacity: 0.6;
     }
-
-    main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 72px 24px 60px;
+    /* one-time boot sweep */
+    .oled .sweep {
+      content: ''; position: absolute; left: 0; right: 0; top: 0; height: 26%; z-index: 4; pointer-events: none;
+      background: linear-gradient(to bottom, transparent, rgba(201,176,107,0.10), transparent);
+      animation: sweep 1100ms ease-out 1 both;
     }
+    @keyframes sweep { 0% { transform: translateY(-120%); opacity: 0.9; } 100% { transform: translateY(460%); opacity: 0; } }
 
-    /* Logo */
-    .logo-wrap {
-      text-align: center;
-      margin-bottom: 48px;
-      /* isolate so blend mode works against page bg only */
-      isolation: auto;
-    }
-
-    .logo-wrap img {
-      width: 100%;
-      max-width: 520px;
-      height: auto;
-      display: inline-block;
-      /* push logo's gray bg to near-black, keep gold vivid */
-      filter: contrast(1.7);
-      mix-blend-mode: screen;
-    }
-
-    /* Tagline */
     .tagline {
-      text-align: center;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.28em;
+      font-size: clamp(1.45rem, 4.4vw, 2.35rem);
+      font-weight: bold;
+      letter-spacing: 0.06em;
       color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 20px;
+      line-height: 1.18;
     }
+    .tagline .cursor {
+      display: inline-block;
+      width: 0.46em; height: 1.02em;
+      margin-left: 0.12em;
+      background: var(--gold);
+      transform: translateY(0.12em);
+      animation: blink 1.05s steps(1) infinite;
+    }
+    @keyframes blink { 0%, 50% { opacity: 1; } 50.01%, 100% { opacity: 0; } }
 
-    /* One-liner */
-    .oneliner {
-      text-align: center;
-      font-size: 20px;
-      font-weight: 400;
+    .hero .lede {
+      max-width: 680px;
+      margin: 22px auto 0;
+      font-size: clamp(1.15rem, 2.7vw, 1.5rem);
+      line-height: 1.45;
       color: var(--text);
-      line-height: 1.5;
-      margin-bottom: 20px;
     }
 
-    /* Status badge */
-    .status {
-      text-align: center;
+    .statusrow {
+      margin-top: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px 16px;
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.22em;
-      color: var(--text-dim);
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      margin-bottom: 40px;
+      color: var(--muted);
+    }
+    .statusrow .sep { color: var(--gold-2); }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      border: 1px solid var(--rule-2);
+      padding: 6px 12px;
+      color: var(--gold);
+    }
+    .led {
+      width: 7px; height: 7px; background: var(--gold);
+      box-shadow: 0 0 7px rgba(201,176,107,0.9);
+      animation: pulse 2.4s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.32; } }
+
+    /* ──────────────── SECTIONS ──────────────── */
+    section.block { padding: clamp(56px, 8vw, 104px) 0; border-top: 1px solid var(--rule); }
+
+    .opener { margin-bottom: clamp(30px, 4vw, 46px); }
+    .opener .head {
+      display: flex; align-items: baseline; gap: 14px;
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+    }
+    .opener .num { color: var(--gold); font-weight: bold; letter-spacing: 0.04em; }
+    .opener .dot { color: var(--gold); }
+    .opener .title {
+      color: var(--text); font-weight: bold; text-transform: uppercase; letter-spacing: 0.18em;
+      font-size: clamp(0.82rem, 1.7vw, 0.98rem);
+    }
+    .opener hr { border: none; border-top: 1px solid var(--rule-2); margin: 14px 0 0; }
+    .kicker { margin-top: 14px; font-style: italic; color: var(--muted); font-size: 1.02rem; }
+
+    .statement {
+      font-size: clamp(1.3rem, 3.2vw, 1.95rem);
+      line-height: 1.4;
+      color: var(--text);
+      max-width: 800px;
+    }
+    .statement b { color: var(--gold); font-weight: bold; }
+
+    p.body { color: var(--body); max-width: 760px; margin-top: 18px; }
+
+    /* Callout / pull quote */
+    .callout {
+      margin-top: 34px;
+      background: var(--bg-2);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--gold);
+      padding: clamp(20px, 3vw, 30px) clamp(22px, 3.4vw, 36px);
+      font-style: italic;
+      font-size: clamp(1.12rem, 2.5vw, 1.42rem);
+      line-height: 1.45;
+      color: var(--gold-soft);
+      max-width: 820px;
     }
 
-    /* Rules */
-    hr {
-      border: none;
-      border-top: 1px solid var(--rule);
-      margin: 40px 0;
+    /* Capability blocks */
+    .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .pillar {
+      background: var(--bg-2);
+      border: 1px solid var(--rule);
+      border-left: 3px solid var(--gold);
+      padding: clamp(20px, 2.4vw, 28px);
     }
+    .pillar .pn { font-size: 12px; letter-spacing: 0.2em; color: var(--gold); font-weight: bold; }
+    .pillar h3 { margin: 12px 0 10px; font-size: 1.16rem; color: var(--text); font-weight: bold; line-height: 1.25; }
+    .pillar p { font-size: 0.97rem; color: var(--body); line-height: 1.55; }
 
-    /* Capability list */
-    .capabilities {
-      list-style: none;
+    /* Architecture stack */
+    .stack { border: 1px solid var(--rule-2); border-left: 3px solid var(--gold); }
+    .layer { display: grid; grid-template-columns: 150px 1fr; }
+    .layer + .layer { border-top: 1px solid var(--rule); }
+    .layer .tag {
+      background: rgba(201, 176, 107, 0.09);
+      border-right: 1px solid var(--rule);
+      padding: 18px 18px;
+      display: flex; flex-direction: column; gap: 4px; justify-content: center;
     }
+    .layer .tag .l { font-size: 1.3rem; font-weight: bold; color: var(--gold); line-height: 1; }
+    .layer .tag .n { font-size: 9.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-2); }
+    .layer .desc { padding: 18px 22px; color: var(--body); font-size: 0.98rem; line-height: 1.5; }
+    .layer .desc b { color: var(--text); font-weight: bold; }
+    .stack-note { margin-top: 16px; font-size: 12px; letter-spacing: 0.04em; color: var(--muted); font-style: italic; }
 
-    .capabilities li {
-      font-size: 15px;
-      color: var(--text-body);
-      line-height: 1.6;
-      padding: 6px 0;
+    /* Stat band */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--rule); border: 1px solid var(--rule); margin-bottom: 30px; }
+    .stat { background: var(--bg); padding: clamp(18px, 2.4vw, 26px) 16px; text-align: center; }
+    .stat .v { font-size: clamp(1.35rem, 3vw, 1.85rem); font-weight: bold; color: var(--gold); line-height: 1.1; }
+    .stat .k { margin-top: 8px; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+    /* Middle-dot bullets */
+    ul.dots { list-style: none; max-width: 800px; }
+    ul.dots li { position: relative; padding: 9px 0 9px 24px; color: var(--body); border-bottom: 1px solid var(--rule); line-height: 1.55; }
+    ul.dots li:last-child { border-bottom: none; }
+    ul.dots li::before { content: '·'; position: absolute; left: 4px; top: 6px; color: var(--gold); font-size: 1.5rem; line-height: 1; }
+    ul.dots li b { color: var(--text); font-weight: bold; }
+
+    .phasemark {
+      margin-top: 30px;
+      display: inline-flex; align-items: center; gap: 12px;
+      border: 1px solid var(--rule-2); border-left: 3px solid var(--gold);
+      padding: 12px 18px;
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
     }
+    .phasemark .here { color: var(--muted); }
+
+    /* Closing hero statement */
+    .closing { text-align: center; padding: clamp(64px, 10vw, 120px) 0; }
+    .closing .rule { border: none; border-top: 1px solid var(--rule-2); max-width: 440px; margin: 0 auto; }
+    .closing .big { padding: clamp(26px, 4vw, 40px) 0; }
+    .closing .big .l1, .closing .big .l2 {
+      font-size: clamp(1.7rem, 6vw, 3.1rem);
+      font-weight: bold; letter-spacing: 0.1em; line-height: 1.16; text-transform: uppercase;
+    }
+    .closing .big .l1 { color: var(--text); }
+    .closing .big .l2 { color: var(--gold); }
 
     /* Contact */
-    .contact-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 10px;
+    .contact { text-align: center; padding-top: 6px; }
+    .contact .label { font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .contact .note { color: var(--body); max-width: 560px; margin: 0 auto 22px; }
+    .contact .links { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px 18px; }
+    .contact .links a {
+      text-decoration: none; color: var(--text);
+      border-bottom: 1px solid var(--rule-2);
+      padding-bottom: 2px;
+      transition: color 160ms ease, border-color 160ms ease;
     }
-
-    .contact-email a {
-      font-size: 16px;
-      color: var(--text);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(201, 176, 107, 0.4);
-      transition: color 150ms ease, border-color 150ms ease;
-    }
-
-    .contact-email a:hover {
-      color: var(--gold);
-      border-color: var(--gold);
-    }
+    .contact .links a:hover, .contact .links a:focus-visible { color: var(--gold); border-color: var(--gold); }
+    .contact .links .sep { color: var(--gold-2); border: none; }
 
     /* Footer */
-    footer {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 24px 48px;
+    footer { border-top: 1px solid var(--rule); padding: 26px 0 38px; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: space-between; align-items: center; }
+    footer p { font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+
+    /* Scroll reveal */
+    [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    [data-reveal].in { opacity: 1; transform: none; }
+
+    /* ──────────────── RESPONSIVE ──────────────── */
+    @media (max-width: 760px) {
+      .pillars { grid-template-columns: 1fr; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 460px) {
+      body { font-size: 16px; }
+      .layer { grid-template-columns: 92px 1fr; }
+      .layer .tag .l { font-size: 1.1rem; }
+      .topbar .class { display: none; }
+      .closing .big .l1, .closing .big .l2 { letter-spacing: 0.04em; }
     }
 
-    footer p {
-      font-size: 11px;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
-    }
-
-    /* Responsive */
-    @media (max-width: 480px) {
-      main {
-        padding: 60px 20px 40px;
-      }
-
-      .logo-wrap img {
-        max-width: 220px;
-      }
-
-      .oneliner {
-        font-size: 18px;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      body { animation: none; opacity: 1; }
+      .oled img, .oled .sweep, .led, .tagline .cursor { animation: none; }
+      .tagline .cursor { opacity: 1; }
+      [data-reveal] { opacity: 1; transform: none; transition: none; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <header class="logo-wrap">
-      <img src="logo.jpg" alt="Krath Veil" />
-    </header>
+  <div class="stripe"></div>
 
-    <p class="tagline">Dominate.&nbsp; Connect.&nbsp; Disappear.</p>
+  <header class="topbar">
+    <span class="brand">Krath&nbsp;Veil</span>
+    <span class="class">Pre-Launch &middot; Confidential &middot; 2026</span>
+  </header>
 
-    <p class="oneliner">Tactical mesh communications for the ground forces of the Indian state.</p>
+  <!-- ──────────────── HERO ──────────────── -->
+  <div class="wrap">
+    <section class="hero">
+      <div class="oled-frame">
+        <div class="oled">
+          <span class="sweep"></span>
+          <img src="krathveil-mark.png" width="661" height="377" alt="Krath Veil" />
+        </div>
+      </div>
 
-    <p class="status">Pre-Launch &middot; 2026 &middot; Hyderabad</p>
+      <h1 class="tagline">Dominate. Connect. Disappear.<span class="cursor" aria-hidden="true"></span></h1>
 
-    <hr />
+      <p class="lede">The battlefield networking operating system for India.</p>
 
-    <ul class="capabilities">
-      <li>Tactical mesh communications for paramilitary ground forces.</li>
-      <li>Real-time situational awareness for the dismounted soldier.</li>
-      <li>Built for BSF, CRPF, and NDRF operations in cellular dead-zones.</li>
-    </ul>
-
-    <hr />
-
-    <section>
-      <p class="contact-label">Contact</p>
-      <p class="contact-email"><a href="mailto:samarth@krathveil.com">samarth@krathveil.com</a></p>
+      <div class="statusrow">
+        <span class="pill"><span class="led" aria-hidden="true"></span>Pre-Launch</span>
+        <span class="sep">/</span>
+        <span>Hyderabad, India</span>
+        <span class="sep">/</span>
+        <span>2026</span>
+      </div>
     </section>
-  </main>
+  </div>
+
+  <!-- ──────────────── 01 · THE FABRIC ──────────────── -->
+  <section class="block">
+    <div class="wrap">
+      <div class="opener" data-reveal>
+        <div class="head"><span class="num">01</span><span class="dot">&middot;</span><span class="title">The Fabric</span></div>
+        <hr />
+        <p class="kicker">What KTAF is, in one line.</p>
+      </div>
+      <p class="statement" data-reveal>
+        <b>KTAF</b>, the Krath Tactical Adaptive Fabric, turns any radio, drone, or sensor into one
+        AI-coordinated, jam-resilient mesh.
+      </p>
+      <div class="callout" data-reveal>
+        KTAF does not replace radios. It makes whatever radios you already have behave as one intelligent network.
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────── 02 · CAPABILITIES ──────────────── -->
+  <section class="block">
+    <div class="wrap">
+      <div class="opener" data-reveal>
+        <div class="head"><span class="num">02</span><span class="dot">&middot;</span><span class="title">Capabilities</span></div>
+        <hr />
+        <p class="kicker">Three things the fabric does, above whatever you already field.</p>
+      </div>
+      <div class="pillars">
+        <div class="pillar" data-reveal>
+          <span class="pn">01</span>
+          <h3>Unified situational awareness</h3>
+          <p>ATAK-native by default. Every node, handheld, vehicle, drone, and sensor pushes position, status, and Cursor-on-Target into one shared operational picture. Voice becomes one channel, not the only channel.</p>
+        </div>
+        <div class="pillar" data-reveal>
+          <span class="pn">02</span>
+          <h3>Transport-agnostic interop</h3>
+          <p>Runs on LoRa, MANET WiFi, HaLow, LTE, SATCOM, and SDR. Bridges into VHF, UHF, HF, and the BEL tactical radio family. Any radio, any band, any backhaul; one coordination layer above all of them.</p>
+        </div>
+        <div class="pillar" data-reveal>
+          <span class="pn">03</span>
+          <h3>Jam-resilient, sovereign-controlled</h3>
+          <p>Frequency agility, low-probability-of-intercept LoRa physics, and a mesh that self-heals under contested RF. Indian source code, Indian-controlled servers, Indian supply chain.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ──────────────── 03 · ARCHITECTURE ──────────────── -->
+  <section class="block">
+    <div class="wrap">
+      <div class="opener" data-reveal>
+        <div class="head"><span class="num">03</span><span class="dot">&middot;</span><span class="title">Architecture</span></div>
+        <hr />
+        <p class="kicker">Four layers. Well-defined interfaces.</p>
+      </div>
+      <div class="stack" data-reveal>
+        <div class="layer">
+          <div class="tag"><span class="l">L4</span><span class="n">Application</span></div>
+          <div class="desc"><b>ATAK / KV-TAK fork, drone GCS, sensor management, C2.</b> Third-party mission software via a published API.</div>
+        </div>
+        <div class="layer">
+          <div class="tag"><span class="l">L3</span><span class="n">Coordination</span></div>
+          <div class="desc"><b>The defensible core.</b> Unified node identity and cryptographic auth, adaptive multi-path routing across every transport, mission-priority QoS. AES-256-GCM, X25519 key exchange.</div>
+        </div>
+        <div class="layer">
+          <div class="tag"><span class="l">L2</span><span class="n">RF Awareness</span></div>
+          <div class="desc"><b>Sees the spectrum.</b> Passive spectrum monitoring, per-link quality scoring, jamming detection with direction estimation, anomaly classification.</div>
+        </div>
+        <div class="layer">
+          <div class="tag"><span class="l">L1</span><span class="n">Transport</span></div>
+          <div class="desc"><b>Any bearer.</b> LoRa, OpenMANET, HaLow, LTE / 5G, SATCOM, SDR. Bridges into VHF, UHF, HF, and the BEL tactical radio family.</div>
+        </div>
+      </div>
+      <p class="stack-note" data-reveal>Defensibility lives in Layers 2 and 3: the coordination intelligence and the operational data feeding the awareness engine. We ship the whole stack, Indian.</p>
+    </div>
+  </section>
+
+  <!-- ──────────────── 04 · FIELDED TODAY ──────────────── -->
+  <section class="block">
+    <div class="wrap">
+      <div class="opener" data-reveal>
+        <div class="head"><span class="num">04</span><span class="dot">&middot;</span><span class="title">Fielded Today</span></div>
+        <hr />
+        <p class="kicker">A functional prototype, field-tested. KTAF Core.</p>
+      </div>
+      <div class="stats" data-reveal>
+        <div class="stat"><div class="v">~10 km</div><div class="k">Range, clear LoS</div></div>
+        <div class="stat"><div class="v">6-node</div><div class="k">Encrypted mesh</div></div>
+        <div class="stat"><div class="v">AES-256</div><div class="k">End-to-end</div></div>
+        <div class="stat"><div class="v">865-867</div><div class="k">MHz ISM, WPC-licensed</div></div>
+      </div>
+      <ul class="dots" data-reveal>
+        <li><b>Encrypted LoRa mesh.</b> Six nodes on the Indian ISM band, AES-256 throughout.</li>
+        <li><b>ATAK integration, end-to-end.</b> Cursor-on-Target messaging, shared position reporting, and tactical markers, all routed over the mesh.</li>
+        <li><b>Drone-borne airborne relay.</b> Same firmware as the ground nodes. One node at 100 m AGL replaces three to five ground relays.</li>
+        <li><b>Multi-day endurance.</b> Field-validated range on standard 18650 cells.</li>
+      </ul>
+      <div class="phasemark" data-reveal>Phase&nbsp;1 &middot; KTAF&nbsp;Core <span class="here">&middot; We are here</span></div>
+    </div>
+  </section>
+
+  <!-- ──────────────── CLOSING ──────────────── -->
+  <section class="closing">
+    <div class="wrap">
+      <hr class="rule" data-reveal />
+      <div class="big" data-reveal>
+        <div class="l1">Dominate. Connect.</div>
+        <div class="l2">Disappear.</div>
+      </div>
+      <hr class="rule" data-reveal />
+
+      <div class="contact" style="margin-top: clamp(40px, 6vw, 64px);" data-reveal>
+        <p class="label">Contact</p>
+        <p class="note">Pre-launch. For partnership, pilot, and investment enquiries.</p>
+        <div class="links">
+          <a href="mailto:samarth@krathveil.com">samarth@krathveil.com</a>
+          <span class="sep">&middot;</span>
+          <a href="tel:+919004923362">+91 90049 23362</a>
+          <span class="sep">&middot;</span>
+          <a href="samarth.html">Founder</a>
+          <span class="sep">&middot;</span>
+          <a href="https://www.linkedin.com/in/sam4rth" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    <p>&copy; 2026 Krath Veil &middot; Hyderabad, India &middot; Confidential</p>
+    <div class="wrap">
+      <p>&copy; 2026 Krath Veil Defence Systems</p>
+      <p>Hyderabad, India &middot; Confidential &middot; v1.0</p>
+    </div>
   </footer>
+
+  <script>
+    (function () {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var els = document.querySelectorAll('[data-reveal]');
+      if (reduce || !('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
