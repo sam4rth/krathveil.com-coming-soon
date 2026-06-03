@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Samarth Srivastava, Founder of Krath Veil</title>
-  <meta name="description" content="Samarth Srivastava, Founder and CEO of Krath Veil. Building a resilient tactical mesh for the ground forces of the Indian state. Pre-launch, Hyderabad." />
-  <meta name="theme-color" content="#0A0A0B" />
+  <meta name="description" content="Samarth Srivastava, Founder and CEO of Krath Veil. The problem, KTAF, what is fielded today, my background, and what I am looking for. Pre-seed, Hyderabad." />
+  <meta name="theme-color" content="#000000" />
   <meta property="og:title" content="Samarth Srivastava, Founder of Krath Veil" />
-  <meta property="og:description" content="Building a resilient tactical mesh for the ground forces of the Indian state. Pre-launch, Hyderabad." />
+  <meta property="og:description" content="Building KTAF, a resilient tactical mesh for the ground forces of the Indian state. Pre-seed, Hyderabad." />
   <meta property="og:type" content="profile" />
   <meta property="og:image" content="logo.jpg" />
 
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230A0A0B'/><circle cx='16' cy='16' r='3' fill='%23C9B06B'/><circle cx='6' cy='8' r='2' fill='%23C9B06B'/><circle cx='26' cy='9' r='2' fill='%23C9B06B'/><circle cx='25' cy='25' r='2' fill='%23C9B06B'/><circle cx='7' cy='24' r='2' fill='%23C9B06B'/><g stroke='%23C9B06B' stroke-width='1' opacity='0.6'><line x1='16' y1='16' x2='6' y2='8'/><line x1='16' y1='16' x2='26' y2='9'/><line x1='16' y1='16' x2='25' y2='25'/><line x1='16' y1='16' x2='7' y2='24'/></g></svg>" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000000'/><circle cx='16' cy='16' r='3' fill='%23C9B06B'/><circle cx='6' cy='8' r='2' fill='%23C9B06B'/><circle cx='26' cy='9' r='2' fill='%23C9B06B'/><circle cx='25' cy='25' r='2' fill='%23C9B06B'/><circle cx='7' cy='24' r='2' fill='%23C9B06B'/><g stroke='%23C9B06B' stroke-width='1' opacity='0.6'><line x1='16' y1='16' x2='6' y2='8'/><line x1='16' y1='16' x2='26' y2='9'/><line x1='16' y1='16' x2='25' y2='25'/><line x1='16' y1='16' x2='7' y2='24'/></g></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,9 +21,8 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0A0A0B; --bg-2: #0F0F11;
+      --bg: #000000; --bg-2: #0C0C0E;
       --gold: #C9B06B; --gold-bright: #E6D29A; --gold-dark: #8A7440;
-      --green: #A6C24B;
       --text: #F3F0E9; --muted: #9D998E; --dim: rgba(243,240,233,0.60);
       --line: rgba(255,255,255,0.10); --line-2: rgba(255,255,255,0.06); --line-gold: rgba(201,176,107,0.28);
       --disp: 'Space Grotesk', system-ui, sans-serif;
@@ -33,13 +32,12 @@
     body { background: var(--bg); color: var(--text); font-family: var(--body); font-size: 16px; line-height: 1.62; opacity: 0; animation: boot 500ms ease forwards; }
     @keyframes boot { to { opacity: 1; } }
     a { color: inherit; text-decoration: none; }
-    .glyph { width: 22px; height: 22px; flex-shrink: 0; }
     h1, h2, h3, .disp { font-family: var(--disp); font-weight: 700; letter-spacing: -0.01em; }
 
     .wrap { max-width: 760px; margin: 0 auto; padding: 0 clamp(20px, 6vw, 40px); }
 
     /* nav */
-    .nav { position: sticky; top: 0; z-index: 20; background: rgba(10,10,11,0.86); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-2); }
+    .nav { position: sticky; top: 0; z-index: 20; background: rgba(0,0,0,0.86); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--line-2); }
     .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 60px; max-width: 760px; }
     .nav .brand { display: flex; align-items: center; gap: 10px; font-family: var(--disp); font-weight: 700; letter-spacing: 0.16em; font-size: 14px; text-transform: uppercase; }
     .nav a.back { font-family: var(--disp); font-size: 13px; letter-spacing: 0.06em; color: var(--muted); transition: color 150ms ease; }
@@ -54,24 +52,34 @@
 
     /* profile */
     .profile { padding: clamp(44px, 8vw, 80px) 0 clamp(32px, 5vw, 48px); }
-    .profile .g { width: 34px; height: 34px; color: var(--gold); margin-bottom: 22px; }
     .profile .role { margin-bottom: 12px; }
     .profile h1 { font-size: clamp(2.2rem, 8vw, 4rem); line-height: 0.98; text-transform: uppercase; }
-    .profile .bio { color: var(--dim); font-size: clamp(1.02rem, 2.4vw, 1.25rem); margin-top: 18px; max-width: 560px; line-height: 1.5; }
+    .profile .bio { color: var(--dim); font-size: clamp(1.02rem, 2.4vw, 1.25rem); margin-top: 18px; max-width: 580px; line-height: 1.5; }
 
     /* contact links */
     .links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
     .links a { display: inline-flex; align-items: center; gap: 9px; font-family: var(--disp); font-size: 13px; letter-spacing: 0.03em; padding: 11px 18px; border: 1px solid var(--line); color: var(--text); transition: border-color 150ms ease, color 150ms ease; }
     .links a:hover { border-color: var(--gold); color: var(--gold); }
-    .links a.solid { background: var(--gold); color: #0A0A0B; border-color: var(--gold); }
-    .links a.solid:hover { background: var(--gold-bright); border-color: var(--gold-bright); color: #0A0A0B; }
+    .links a.solid { background: var(--gold); color: #000; border-color: var(--gold); }
+    .links a.solid:hover { background: var(--gold-bright); border-color: var(--gold-bright); color: #000; }
     .links .dot { width: 6px; height: 6px; background: var(--gold); }
-    .links a.solid .dot { background: #0A0A0B; }
+    .links a.solid .dot { background: #000; }
 
-    /* building */
-    .build-text { color: var(--muted); font-size: 1.05rem; line-height: 1.65; max-width: 640px; }
+    /* statement + body */
+    .statement { font-family: var(--disp); font-weight: 700; font-size: clamp(1.3rem, 3.4vw, 1.95rem); line-height: 1.2; color: var(--text); max-width: 660px; margin-bottom: 18px; letter-spacing: -0.01em; }
+    .statement b { color: var(--gold); }
+    .build-text { color: var(--muted); font-size: 1.05rem; line-height: 1.65; max-width: 660px; }
     .build-text b { color: var(--text); font-weight: 600; }
-    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+
+    /* sub-label + spec list */
+    .sub { font-family: var(--disp); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin: 32px 0 6px; }
+    .spec { list-style: none; }
+    .spec li { position: relative; padding: 10px 0 10px 22px; color: var(--muted); border-bottom: 1px solid var(--line-2); line-height: 1.5; max-width: 700px; }
+    .spec li:last-child { border-bottom: none; }
+    .spec li::before { content: ''; position: absolute; left: 2px; top: 17px; width: 6px; height: 6px; background: var(--gold); }
+    .spec li b { color: var(--text); font-weight: 600; }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
     .tag { font-family: var(--disp); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); padding: 6px 12px; border: 1px solid var(--line-gold); }
 
     /* background list */
@@ -82,11 +90,59 @@
     .cred li b { color: var(--text); font-weight: 600; }
 
     /* looking for */
-    .look { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-2); border: 1px solid var(--line-2); }
-    .look .item { background: var(--bg); padding: 22px clamp(18px,3vw,26px); }
-    .look .item h3 { font-family: var(--disp); font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.02em; }
-    .look .item p { color: var(--muted); font-size: 0.92rem; margin-top: 7px; line-height: 1.5; }
-    @media (max-width: 560px) { .look { grid-template-columns: 1fr; } }
+    .look-intro { color: var(--dim); max-width: 600px; margin-bottom: 26px; font-size: 1.02rem; }
+    .look { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .look .item { position: relative; display: block; background: var(--bg-2); border: 1px solid var(--line); padding: clamp(20px, 3vw, 28px); padding-bottom: 46px; overflow: hidden; transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease; }
+    .look .item::before { content: ''; position: absolute; left: 0; top: 0; height: 2px; width: 0; background: var(--gold); transition: width 280ms ease; }
+    .look .item:hover { transform: translateY(-4px); border-color: var(--line-gold); background: rgba(201,176,107,0.05); box-shadow: 0 14px 34px rgba(0,0,0,0.5); }
+    .look .item:hover::before { width: 100%; }
+    .look .item .ln { font-family: var(--disp); font-size: 11px; letter-spacing: 0.18em; color: var(--gold-dark); transition: color 220ms ease; }
+    .look .item:hover .ln { color: var(--gold); }
+    .look .item h3 { font-family: var(--disp); font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.02em; margin: 12px 0 8px; }
+    .look .item p { color: var(--muted); font-size: 0.92rem; line-height: 1.55; }
+    .look .item .arrow { position: absolute; right: clamp(18px,4vw,26px); bottom: 18px; font-family: var(--disp); color: var(--gold); opacity: 0.55; transition: opacity 220ms ease, transform 220ms ease; }
+    .look .item:hover .arrow { opacity: 1; transform: translateX(5px); }
+    @media (max-width: 560px) { .look { grid-template-columns: 1fr; } .btn-contact { width: 100%; } .links a { padding: 13px 18px; } }
+    @media (hover: none) {
+      .look .item:hover { transform: none; box-shadow: none; background: var(--bg-2); border-color: var(--line); }
+      .look .item:hover::before { width: 0; }
+      .look .item:hover .arrow { transform: none; opacity: 0.55; }
+      .links a:hover, .tag:hover, .btn-contact:hover, .nav a.back:hover { transform: none; box-shadow: none; }
+      .profile h1:hover { animation: none; }
+    }
+
+    /* contact cta */
+    .cta-end { text-align: center; }
+    .cta-end .kick { display: block; margin-bottom: 14px; }
+    .cta-h { font-size: clamp(1.9rem, 6.5vw, 3.2rem); text-transform: uppercase; line-height: 1; }
+    .cta-sub { color: var(--dim); margin: 14px auto 30px; max-width: 460px; }
+    .btn-contact { display: inline-flex; align-items: center; gap: 10px; font-family: var(--disp); font-weight: 500; font-size: 15px; letter-spacing: 0.04em; background: var(--gold); color: #000; padding: 15px 30px; border: 1px solid var(--gold); transition: background 200ms ease, transform 200ms ease, box-shadow 200ms ease; }
+    .btn-contact:hover { background: var(--gold-bright); transform: translateY(-3px); box-shadow: 0 14px 38px rgba(201,176,107,0.22); }
+    .btn-contact .ar { transition: transform 220ms ease; }
+    .btn-contact:hover .ar { transform: translateX(6px); }
+
+    /* interactivity */
+    .links a { transition: border-color 160ms ease, color 160ms ease, transform 160ms ease, background 160ms ease; }
+    .links a:hover { transform: translateY(-3px); }
+    .cred li { border-left: 2px solid transparent; transition: background 200ms ease, border-color 200ms ease; }
+    .cred li:hover { background: rgba(201,176,107,0.04); border-left-color: var(--gold); }
+    .cred li:hover .n { color: var(--gold-bright); }
+    .spec li { transition: color 180ms ease; }
+    .spec li:hover { color: var(--text); }
+    .spec li:hover::before { background: var(--gold-bright); box-shadow: 0 0 8px rgba(201,176,107,0.6); }
+    .tag { transition: background 180ms ease, color 180ms ease, transform 180ms ease, border-color 180ms ease; }
+    .tag:hover { background: rgba(201,176,107,0.14); color: var(--gold-bright); border-color: var(--gold); transform: translateY(-2px); }
+    .nav a.back { transition: color 150ms ease, transform 150ms ease; }
+    .nav a.back:hover { transform: translateX(3px); }
+    .profile h1 { will-change: transform; }
+    .profile h1:hover { animation: nameGlitch 380ms steps(2, end) 1; }
+    @keyframes nameGlitch {
+      0% { text-shadow: none; transform: translateX(0); }
+      20% { text-shadow: -3px 0 var(--gold), 3px 0 rgba(230,210,154,0.65); transform: translateX(2px); }
+      40% { text-shadow: 3px 0 var(--gold), -3px 0 rgba(230,210,154,0.65); transform: translateX(-2px); }
+      60% { text-shadow: -2px 0 var(--gold); transform: translateX(1px); }
+      100% { text-shadow: none; transform: translateX(0); }
+    }
 
     /* footer */
     footer { border-top: 1px solid var(--line-2); padding: 30px 0 44px; }
@@ -96,22 +152,10 @@
 
     [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
     [data-reveal].in { opacity: 1; transform: none; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } body { animation: none; opacity: 1; } [data-reveal] { opacity: 1; transform: none; transition: none; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } body { animation: none; opacity: 1; } [data-reveal] { opacity: 1; transform: none; transition: none; } .profile h1:hover, .look .item:hover, .btn-contact:hover, .links a:hover, .cred li:hover, .tag:hover, .nav a.back:hover { animation: none; transform: none; } }
   </style>
 </head>
 <body>
-
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="meshglyph" viewBox="0 0 24 24">
-      <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-opacity="0.7">
-        <line x1="12" y1="12" x2="4" y2="5"/><line x1="12" y1="12" x2="20" y2="6"/>
-        <line x1="12" y1="12" x2="20" y2="19"/><line x1="12" y1="12" x2="4" y2="19"/>
-      </g>
-      <circle cx="12" cy="12" r="3" fill="currentColor"/>
-      <circle cx="4" cy="5" r="2" fill="currentColor"/><circle cx="20" cy="6" r="2" fill="currentColor"/>
-      <circle cx="20" cy="19" r="2" fill="currentColor"/><circle cx="4" cy="19" r="2" fill="currentColor"/>
-    </symbol>
-  </svg>
 
   <header class="nav">
     <div class="wrap">
@@ -126,7 +170,7 @@
       <div class="wrap">
         <p class="kick role">Founder &amp; CEO &middot; Krath Veil</p>
         <h1>Samarth Srivastava</h1>
-        <p class="bio">Building a resilient tactical mesh for the ground forces of the Indian state. Pre-launch, Hyderabad.</p>
+        <p class="bio">Building KTAF, a resilient tactical mesh for the ground forces of the Indian state. Pre-seed, Hyderabad.</p>
         <div class="links">
           <a class="solid" href="mailto:samarth@krathveil.com"><span class="dot"></span>samarth@krathveil.com</a>
           <a href="tel:+919004923362"><span class="dot"></span>+91 90049 23362</a>
@@ -136,16 +180,35 @@
       </div>
     </section>
 
-    <!-- BUILDING -->
+    <!-- THE PROBLEM -->
     <section class="block">
       <div class="wrap">
-        <div class="sec-h" data-reveal><h2>What I'm building</h2><span class="idx">[ 01 ]</span></div>
-        <p class="build-text" data-reveal>Krath Veil builds tactical mesh communications for the soldiers who operate where there is no signal: forests, mountains, disaster zones, contested frontiers. <b>KTAF turns any radio, drone, or sensor into one AI-coordinated, jam-resilient network.</b> The market is roughly 1.5 million strong and almost entirely unserved.</p>
+        <div class="sec-h" data-reveal><h2>The Problem</h2><span class="idx">[ 01 ]</span></div>
+        <p class="statement" data-reveal>India owns the platforms. It does not own the connective tissue between them.</p>
+        <p class="build-text" data-reveal>Small units still run on voice-only comms, with no shared situational picture and no connectivity where the network does not reach. Israeli UAVs, Russian air defence, French fighters, and several radio families operate side by side, with no native coordination layer above them. Operation Sindoor in May 2025 exposed the gap under heavy jamming and spoofing, and the Army has since committed publicly to SDR, frequency agility, and adaptive C2.</p>
+      </div>
+    </section>
+
+    <!-- WHAT I'M BUILDING -->
+    <section class="block">
+      <div class="wrap">
+        <div class="sec-h" data-reveal><h2>What I'm building</h2><span class="idx">[ 02 ]</span></div>
+        <p class="statement" data-reveal><b>KTAF</b>, the Krath Tactical Adaptive Fabric, turns any radio, drone, or sensor into one AI-coordinated, jam-resilient mesh.</p>
+        <p class="build-text" data-reveal>It does not replace radios. It makes whatever you already field behave as one intelligent network, with a shared ATAK picture that survives contested RF and needs no tower, SIM, or signal. The defensibility sits in the coordination intelligence and the RF-awareness data, both Indian, both compounding with every deployment.</p>
+
+        <p class="sub" data-reveal>Fielded today</p>
+        <ul class="spec" data-reveal>
+          <li><b>Encrypted six-node LoRa mesh.</b> AES-256 throughout, on the WPC-licensed 865 to 867 MHz ISM band.</li>
+          <li><b>ATAK integration, end to end.</b> Cursor-on-Target, shared position reporting, and tactical markers over the mesh.</li>
+          <li><b>Drone-borne airborne relay.</b> One node at 100 m AGL replaces three to five ground relays.</li>
+          <li><b>Field-validated range.</b> Roughly 10 km clear line-of-sight, 2.5 km obstructed urban, multi-day battery.</li>
+        </ul>
+
         <div class="tags" data-reveal>
           <span class="tag">Tactical Mesh</span>
-          <span class="tag">Situational Awareness</span>
-          <span class="tag">BSF / CRPF / NDRF</span>
-          <span class="tag">Pre-Launch 2026</span>
+          <span class="tag">ATAK-native</span>
+          <span class="tag">Jam-resilient</span>
+          <span class="tag">Indigenous</span>
         </div>
       </div>
     </section>
@@ -153,12 +216,13 @@
     <!-- BACKGROUND -->
     <section class="block">
       <div class="wrap">
-        <div class="sec-h" data-reveal><h2>Background</h2><span class="idx">[ 02 ]</span></div>
+        <div class="sec-h" data-reveal><h2>Background</h2><span class="idx">[ 03 ]</span></div>
         <ul class="cred" data-reveal>
-          <li><span class="n">/01</span><span><b>Founding team at Apollyon Dynamics.</b> Built strategy, fundraising, BD, and government relations for an Indian defence drone startup.</span></li>
-          <li><span class="n">/02</span><span><b>Secured an MoU with the Border Security Force.</b> A live channel into operational requirements.</span></li>
-          <li><span class="n">/03</span><span><b>Fluent in Indian defence procurement.</b> DPP, GeM, iDEX, ADITI, DISC, WPC, SCOMET, and the 75% IDDM mandate.</span></li>
-          <li><span class="n">/04</span><span><b>Selected for YC Startup School India.</b> 100-plus mapped Army and CAPF contacts.</span></li>
+          <li><span class="n">/01</span><span><b>Founding member, Apollyon Dynamics.</b> An Indian defence-drone startup building jet-based loitering munitions, target drones, and decoys. Led product strategy, BD, and government relations.</span></li>
+          <li><span class="n">/02</span><span><b>Procurement-native.</b> Fluent in DPP, GeM, iDEX, ADITI, DISC, SCOMET, and the 75% IDDM Atmanirbhar mandate.</span></li>
+          <li><span class="n">/03</span><span><b>Operator network of 100-plus Army and CAPF officers,</b> mapped and tiered. Three written problem statements in hand from a serving officer at HQ Western Command.</span></li>
+          <li><span class="n">/04</span><span><b>Built KTAF Core solo.</b> Python, embedded systems, Android, RF protocols, and mesh-network architecture.</span></li>
+          <li><span class="n">/05</span><span><b>BITS Pilani, Hyderabad Campus.</b></span></li>
         </ul>
       </div>
     </section>
@@ -166,13 +230,44 @@
     <!-- LOOKING FOR -->
     <section class="block">
       <div class="wrap">
-        <div class="sec-h" data-reveal><h2>Looking for</h2><span class="idx">[ 03 ]</span></div>
+        <div class="sec-h" data-reveal><h2>Looking for</h2><span class="idx">[ 04 ]</span></div>
+        <p class="look-intro" data-reveal>If you are any of these, reach out. Each tile opens an email.</p>
         <div class="look" data-reveal>
-          <div class="item"><h3>Technical co-founder</h3><p>RF, embedded, or Android / Python. 5 to 7 yrs. Defence-adjacent preferred.</p></div>
-          <div class="item"><h3>Defence advisor</h3><p>Retired BSF or CRPF at DIG-plus. Operational credibility and procurement access.</p></div>
-          <div class="item"><h3>Pre-seed angels</h3><p>Defence-aware capital. Building the first deployable mesh.</p></div>
-          <div class="item"><h3>Pilot partners</h3><p>Operational units inside CAPF or NDRF for a field trial.</p></div>
+          <a class="item" href="mailto:samarth@krathveil.com?subject=Technical%20founding%20team">
+            <span class="ln">01</span>
+            <h3>Technical founding team</h3>
+            <p>RF, embedded, or Android. 5 to 7 yrs, defence-adjacent. Build KTAF Aware with me.</p>
+            <span class="arrow">&rarr;</span>
+          </a>
+          <a class="item" href="mailto:samarth@krathveil.com?subject=Defence%20advisor">
+            <span class="ln">02</span>
+            <h3>Defence advisor</h3>
+            <p>Retired Signals Corps or CAPF leadership. Operational credibility and procurement access for the iDEX-mandated board.</p>
+            <span class="arrow">&rarr;</span>
+          </a>
+          <a class="item" href="mailto:samarth@krathveil.com?subject=Pre-seed%20capital">
+            <span class="ln">03</span>
+            <h3>Pre-seed capital</h3>
+            <p>Defence-aware capital to ship KTAF Aware and convert the non-dilutive iDEX DISC and ADITI pathway.</p>
+            <span class="arrow">&rarr;</span>
+          </a>
+          <a class="item" href="mailto:samarth@krathveil.com?subject=Pilot%20partner">
+            <span class="ln">04</span>
+            <h3>Pilot partners</h3>
+            <p>Any defence or law-enforcement unit open to a field trial on Indian terrain.</p>
+            <span class="arrow">&rarr;</span>
+          </a>
         </div>
+      </div>
+    </section>
+
+    <!-- CONTACT CTA -->
+    <section class="block cta-end">
+      <div class="wrap">
+        <p class="kick" data-reveal>Get in touch</p>
+        <h2 class="cta-h" data-reveal>Let's build it.</h2>
+        <p class="cta-sub" data-reveal>Pre-seed, and moving fast. Reach out and I'll reply quickly.</p>
+        <a class="btn-contact" href="mailto:samarth@krathveil.com" data-reveal>Contact me <span class="ar">&rarr;</span></a>
       </div>
     </section>
   </main>
@@ -180,7 +275,7 @@
   <footer>
     <div class="wrap">
       <a class="fb" href="/">Krath&nbsp;Veil</a>
-      <p>&copy; 2026 &middot; Hyderabad, India &middot; Confidential</p>
+      <p>&copy; 2026 &middot; Hyderabad, India</p>
     </div>
   </footer>
 
