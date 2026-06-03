@@ -274,8 +274,26 @@
     .faq details[open] summary .x { transform: rotate(45deg); }
     .faq .a { padding: 0 0 24px 56px; color: var(--muted); max-width: 720px; line-height: 1.62; }
 
+    /* ───────── LOOKING FOR ───────── */
+    .look-lead { color: var(--dim); max-width: 560px; margin-bottom: clamp(24px, 3vw, 36px); font-size: 0.98rem; }
+    .look { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .look .item { position: relative; display: block; background: var(--bg-2); border: 1px solid var(--line); padding: clamp(22px, 2.6vw, 30px); padding-bottom: 50px; overflow: hidden; transition: transform 220ms ease, border-color 220ms ease, background 220ms ease, box-shadow 220ms ease; -webkit-tap-highlight-color: transparent; }
+    .look .item::before { content: ''; position: absolute; left: 0; top: 0; height: 2px; width: 0; background: var(--gold); transition: width 280ms ease; }
+    .look .item .ln { font-family: var(--disp); font-size: 12px; letter-spacing: 0.18em; color: var(--gold-dark); }
+    .look .item h3 { font-family: var(--disp); font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; margin: 12px 0 8px; color: var(--text); }
+    .look .item p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+    .look .item .arrow { position: absolute; right: clamp(18px,2.4vw,26px); bottom: 18px; font-family: var(--disp); color: var(--gold); opacity: 0.55; transition: opacity 220ms ease, transform 220ms ease; }
+    @media (hover: hover) and (pointer: fine) {
+      .look .item:hover { transform: translateY(-4px); border-color: var(--line-gold); background: rgba(201,176,107,0.05); box-shadow: 0 16px 40px rgba(0,0,0,0.55); }
+      .look .item:hover::before { width: 100%; }
+      .look .item:hover .ln { color: var(--gold); }
+      .look .item:hover .arrow { opacity: 1; transform: translateX(5px); }
+    }
+    @media (max-width: 680px) { .look { grid-template-columns: 1fr; } }
+
     /* ───────── CTA BAND ───────── */
     .cta { background: var(--gold); color: #0A0A0B; text-align: center; padding: clamp(56px, 9vw, 110px) 0; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .cta h2 { font-size: clamp(2rem, 6vw, 4rem); line-height: 0.98; text-transform: uppercase; }
     .cta p { margin: 14px auto 0; max-width: 540px; font-size: 1.1rem; font-weight: 500; color: #1A1608; }
     .cta .btn { display: inline-block; margin-top: 30px; background: #0A0A0B; color: var(--gold); border-color: #0A0A0B; font-size: 14px; padding: 14px 28px; }
@@ -653,12 +671,32 @@
       </div>
     </section>
 
+    <!-- ───────── LOOKING FOR ───────── -->
+    <section class="block" id="looking">
+      <div class="wrap">
+        <div class="sec-head" data-reveal>
+          <div><p class="kick">[7] &nbsp;The Ask</p><h2>Looking for</h2></div>
+          <span class="idx">[ 07 ]</span>
+        </div>
+        <p class="look-lead" data-reveal>Pre-seed, and building the founding team. If you are any of these, the tile opens an email.</p>
+        <div class="look" data-reveal>
+          <a class="item" href="mailto:samarth@krathveil.com?subject=Technical%20founding%20team"><span class="ln">01</span><h3>Technical founding team</h3><p>RF, embedded, or Android. 5 to 7 yrs, defence-adjacent. Build KTAF Aware with me.</p><span class="arrow">&rarr;</span></a>
+          <a class="item" href="mailto:samarth@krathveil.com?subject=Defence%20advisor"><span class="ln">02</span><h3>Defence advisor</h3><p>Retired Signals Corps or CAPF leadership. Procurement access for the iDEX-mandated board.</p><span class="arrow">&rarr;</span></a>
+          <a class="item" href="mailto:samarth@krathveil.com?subject=Pre-seed%20capital"><span class="ln">03</span><h3>Pre-seed capital</h3><p>Defence-aware capital to ship KTAF Aware and convert the iDEX pathway.</p><span class="arrow">&rarr;</span></a>
+          <a class="item" href="mailto:samarth@krathveil.com?subject=Pilot%20partner"><span class="ln">04</span><h3>Pilot partners</h3><p>Any defence or law-enforcement unit open to a field trial on Indian terrain.</p><span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+
     <!-- ───────── CTA BAND ───────── -->
     <section class="cta" id="contact">
       <div class="wrap">
         <h2>Want to talk?</h2>
         <p>Pre-launch, building the first mesh. We reply fast.</p>
-        <a class="btn" href="mailto:samarth@krathveil.com">samarth@krathveil.com</a>
+        <div class="cta-btns">
+          <a class="btn" href="https://wa.me/919004923362?text=Hi%20Samarth" target="_blank" rel="noopener noreferrer">WhatsApp me</a>
+          <a class="btn" href="mailto:samarth@krathveil.com">samarth@krathveil.com</a>
+        </div>
       </div>
     </section>
 
@@ -669,6 +707,8 @@
         <p class="big"><a href="mailto:samarth@krathveil.com">samarth@krathveil.com</a></p>
         <div class="row">
           <a href="tel:+919004923362">+91 90049 23362</a>
+          <span class="s">/</span>
+          <a href="https://wa.me/919004923362?text=Hi%20Samarth" target="_blank" rel="noopener noreferrer">WhatsApp</a>
           <span class="s">/</span>
           <a href="samarth.html">Founder</a>
           <span class="s">/</span>
