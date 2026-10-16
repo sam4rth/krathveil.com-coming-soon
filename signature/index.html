@@ -132,7 +132,7 @@
     fields.forEach(function(k){ d[k] = val(k) || (usePlaceholders && k !== 'linkedin' ? ph(k) : ''); });
     var tel = d.mobile.replace(/[^\d+]/g, '');
     var li = d.linkedin
-      ? '<td width="16" style="padding:0;vertical-align:middle;width:16px;"><a href="'+esc(d.linkedin)+'" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-linkedin.png" width="16" height="16" alt="LinkedIn" style="display:block;width:16px;height:16px;border:0;"></a></td>'
+      ? '<td style="padding:0 0 0 8px;vertical-align:middle;"><a href="'+esc(d.linkedin)+'" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-linkedin.png" width="14" height="14" alt="LinkedIn" style="display:block;width:14px;height:14px;border:0;"></a></td>'
       : '';
     function row(label, inner){
       return '<tr><td style="padding:1px 10px 1px 0;font-family:'+FONT+';font-size:8px;letter-spacing:0.2em;line-height:14px;color:#8A8880;">'+label+'</td><td style="padding:1px 0;font-family:'+FONT+';font-size:11px;line-height:14px;white-space:nowrap;">'+inner+'</td></tr>';
@@ -141,18 +141,21 @@
     var rows = (d.mobile ? row('MOBILE', link('tel:'+tel, d.mobile)) : '')
       + (d.email ? row('MAIL', link('mailto:'+esc(d.email), d.email)) : '')
       + row('WEB', link('https://krathveil.com', 'krathveil.com'));
-    return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="320" bgcolor="#0B0B0C" style="border-collapse:collapse;width:320px;max-width:320px;background-color:#0B0B0C;font-family:'+FONT+';"><tr><td bgcolor="#0B0B0C" style="padding:14px 16px 13px;background-color:#0B0B0C;">'
-      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:0;vertical-align:middle;"><a href="https://krathveil.com" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-logo.png" width="112" height="28" alt="KRATHVEIL" style="display:block;width:112px;height:28px;border:0;"></a></td>'+li+'</tr></table>'
-      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:11px 0 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr>'
+    var TABLE = '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"';
+    var logo = '<td style="padding:0 18px 0 0;vertical-align:middle;"><a href="https://krathveil.com" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-logo.png" width="112" height="28" alt="KRATHVEIL" style="display:block;width:112px;height:28px;border:0;"></a></td>';
+    var info = '<td style="padding:0;vertical-align:top;">'
+      + TABLE+'><tr><td style="padding:0;font-family:'+FONT+';font-size:13px;font-weight:700;letter-spacing:0.01em;line-height:17px;color:#EDEBE4;white-space:nowrap;">'+esc(d.name)+'</td>'+li+'</tr></table>'
+      + (d.role ? '<div style="padding:1px 0 0;font-family:'+FONT+';font-size:9px;letter-spacing:0.18em;line-height:13px;text-transform:uppercase;color:#C9B06B;white-space:nowrap;">'+esc(d.role)+'</div>' : '')
+      + TABLE.replace('collapse;"', 'collapse;margin-top:6px;"')+'>'+rows+'</table>'
+      + '</td>';
+    var line = '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr>'
       + '<td width="28" height="1" bgcolor="#E0CB8E" style="width:28px;height:1px;font-size:0;line-height:0;background-color:#E0CB8E;">&nbsp;</td>'
       + '<td width="80" height="1" bgcolor="#6B5C34" style="width:80px;height:1px;font-size:0;line-height:0;background-color:#6B5C34;">&nbsp;</td>'
       + '<td height="1" bgcolor="#26262A" style="height:1px;font-size:0;line-height:0;background-color:#26262A;">&nbsp;</td>'
-      + '</tr></table></td></tr></table>'
-      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">'
-      + '<tr><td style="padding:11px 0 0;font-family:'+FONT+';font-size:13px;font-weight:700;letter-spacing:0.01em;line-height:17px;color:#EDEBE4;white-space:nowrap;">'+esc(d.name)+'</td></tr>'
-      + (d.role ? '<tr><td style="padding:1px 0 0;font-family:'+FONT+';font-size:9px;letter-spacing:0.18em;line-height:13px;text-transform:uppercase;color:#C9B06B;white-space:nowrap;">'+esc(d.role)+'</td></tr>' : '')
-      + '</table>'
-      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin-top:8px;">'+rows+'</table>'
+      + '</tr></table>';
+    return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" bgcolor="#0B0B0C" style="border-collapse:collapse;background-color:#0B0B0C;font-family:'+FONT+';"><tr><td bgcolor="#0B0B0C" style="padding:14px 16px;background-color:#0B0B0C;">'
+      + TABLE+'><tr>'+logo+info+'</tr></table>'
+      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:12px 0 0;">'+line+'</td></tr></table>'
       + '</td></tr></table>';
   }
 
