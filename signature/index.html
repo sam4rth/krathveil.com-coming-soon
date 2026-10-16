@@ -27,6 +27,19 @@
   label span em{font-style:normal; color:#6F6B60;}
   input{font-family:inherit; font-size:15px; color:#17171B; padding:11px 12px; border:1px solid rgba(23,23,27,.22); background:#fff; border-radius:0; outline:none;}
   input:focus{border-color:#8A7440;}
+  input:disabled{background:#F6F5F1; color:#A3A199;}
+  .field{display:flex; flex-direction:column; gap:6px;}
+  .field-head{display:flex; align-items:center; justify-content:space-between; gap:12px;}
+  .field-head > label{font-size:10px; letter-spacing:.2em; color:#17171B;}
+  .field.off .field-head > label{color:#A3A199;}
+  .static{font-size:15px; color:#17171B; padding:11px 12px; border:1px solid rgba(23,23,27,.12); background:#F6F5F1;}
+  .field.off .static{color:#A3A199;}
+  .sw{display:inline-flex; flex-direction:row; align-items:center; gap:8px; cursor:pointer; font-size:10px; letter-spacing:.2em; color:#6F6B60; user-select:none;}
+  .sw input{appearance:none; -webkit-appearance:none; margin:0; padding:0; width:34px; height:18px; border:1px solid rgba(23,23,27,.3); background:#E4E1D8; position:relative; cursor:pointer; transition:background .15s;}
+  .sw input::after{content:''; position:absolute; top:2px; left:2px; width:12px; height:12px; background:#fff; border:1px solid rgba(23,23,27,.25); transition:transform .15s;}
+  .sw input:checked{background:#C9B06B; border-color:#B8994F;}
+  .sw input:checked::after{transform:translateX(16px);}
+  .sw input:focus-visible{outline:2px solid #17171B; outline-offset:2px;}
   input::placeholder{color:#A3A199;}
   .panel{background:#fff; padding:28px; overflow-x:auto; border:1px solid rgba(23,23,27,.1);}
   .actions{display:flex; flex-wrap:wrap; align-items:center; gap:14px;}
@@ -62,9 +75,11 @@
     <div class="col-form">
       <div class="kicker">[ 01 ]&nbsp;&nbsp;Your details</div>
       <label><span>FULL NAME</span><input id="f-name" autocomplete="name" placeholder="Samarth Alok Srivastava"></label>
-      <label><span>DESIGNATION</span><input id="f-role" autocomplete="organization-title" placeholder="Founder &amp; CEO"></label>
-      <label><span>MOBILE</span><input id="f-mobile" autocomplete="tel" inputmode="tel" placeholder="+91 90049 23362"></label>
-      <label><span>LINKEDIN URL&nbsp;&nbsp;<em>(LEAVE EMPTY TO HIDE THE ICON)</em></span><input id="f-linkedin" inputmode="url" placeholder="https://www.linkedin.com/in/your-profile/"></label>
+      <div class="field" data-k="role"><div class="field-head"><label for="f-role">DESIGNATION</label><label class="sw"><span>SHOW</span><input type="checkbox" id="s-role" aria-label="Show designation"></label></div><input id="f-role" autocomplete="organization-title" placeholder="Founder &amp; CEO"></div>
+      <div class="field" data-k="mobile"><div class="field-head"><label for="f-mobile">MOBILE</label><label class="sw"><span>SHOW</span><input type="checkbox" id="s-mobile" aria-label="Show mobile"></label></div><input id="f-mobile" autocomplete="tel" inputmode="tel" placeholder="+91 90049 23362"></div>
+      <div class="field" data-k="email"><div class="field-head"><label for="f-email">EMAIL</label><label class="sw"><span>SHOW</span><input type="checkbox" id="s-email" aria-label="Show email"></label></div><input id="f-email" autocomplete="email" inputmode="email" placeholder="name@krathveil.com"></div>
+      <div class="field" data-k="web"><div class="field-head"><label>WEBSITE</label><label class="sw"><span>SHOW</span><input type="checkbox" id="s-web" aria-label="Show website"></label></div><div class="static">krathveil.com</div></div>
+      <div class="field" data-k="linkedin"><div class="field-head"><label for="f-linkedin">LINKEDIN URL</label><label class="sw"><span>SHOW</span><input type="checkbox" id="s-linkedin" aria-label="Show LinkedIn icon"></label></div><input id="f-linkedin" inputmode="url" placeholder="https://www.linkedin.com/in/your-profile/"></div>
     </div>
 
     <div class="col-prev">
@@ -74,7 +89,7 @@
         <button id="copy" type="button" disabled>Copy signature</button>
         <span id="status" class="status" aria-live="polite"></span>
       </div>
-      <p class="note">Fill in at least your name to copy. The preview is exactly what gets pasted into Gmail.</p>
+      <p class="note">Fill in at least your name to copy. Use the switches to choose what appears. The preview is exactly what gets pasted into Gmail.</p>
     </div>
   </div>
 
@@ -114,13 +129,18 @@
   var IMG = 'https://krathveil.com/signature/assets/email/';
   var FONT = "'Space Grotesk',Arial,Helvetica,sans-serif";
   var $ = function(id){ return document.getElementById(id); };
-  var fields = ['name','role','mobile','linkedin'];
+  var fields = ['name','role','mobile','email','linkedin'];
+  var SWITCH_DEFAULTS = { role:true, mobile:true, email:false, web:false, linkedin:true };
+  var switches = Object.keys(SWITCH_DEFAULTS);
   var KEY = 'krathveil-signature-v1';
 
-  try {
-    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
-    fields.forEach(function(k){ if (saved[k]) $('f-'+k).value = saved[k]; });
-  } catch(e) {}
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) {}
+  fields.forEach(function(k){ if (saved[k]) $('f-'+k).value = saved[k]; });
+  var savedOn = saved.show || {};
+  switches.forEach(function(k){ $('s-'+k).checked = (k in savedOn) ? !!savedOn[k] : SWITCH_DEFAULTS[k]; });
+
+  function on(k){ return $('s-'+k).checked; }
 
   function esc(v){ return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   function val(k){ return $('f-'+k).value.trim(); }
@@ -128,22 +148,29 @@
 
   function build(usePlaceholders){
     var d = {};
-    fields.forEach(function(k){ d[k] = val(k) || (usePlaceholders && k !== 'linkedin' ? ph(k) : ''); });
+    fields.forEach(function(k){
+      var shown = k === 'name' || on(k);
+      d[k] = shown ? (val(k) || (usePlaceholders && k !== 'linkedin' ? ph(k) : '')) : '';
+    });
     var tel = d.mobile.replace(/[^\d+]/g, '');
     var li = d.linkedin
       ? '<td style="padding:0 0 0 10px;vertical-align:middle;"><a href="'+esc(d.linkedin)+'" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-linkedin.png" width="16" height="16" alt="LinkedIn" style="display:block;width:16px;height:16px;border:0;"></a></td>'
       : '';
     function link(href, text){ return '<a href="'+href+'" style="color:#EDEBE4;text-decoration:none;">'+esc(text)+'</a>'; }
-    var mobile = d.mobile
-      ? '<div style="padding:10px 0 0;font-family:'+FONT+';font-size:13px;line-height:18px;white-space:nowrap;">'+link('tel:'+tel, d.mobile)+'</div>'
-      : '';
+    var contacts = [];
+    if (d.mobile) contacts.push(link('tel:'+tel, d.mobile));
+    if (d.email) contacts.push(link('mailto:'+esc(d.email), d.email));
+    if (on('web')) contacts.push(link('https://krathveil.com', 'krathveil.com'));
+    var contactLines = contacts.map(function(c, i){
+      return '<div style="padding:'+(i ? '2px' : '10px')+' 0 0;font-family:'+FONT+';font-size:13px;line-height:18px;white-space:nowrap;">'+c+'</div>';
+    }).join('');
     var TABLE = '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;"';
     var logo = '<td width="228" align="center" style="width:228px;padding:0 24px 0 0;vertical-align:middle;text-align:center;"><a href="https://krathveil.com" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-logo-v2.png" width="180" height="60" alt="KRATHVEIL" style="display:block;margin:0 auto;width:180px;height:60px;border:0;"></a></td>';
     var divider = '<td width="1" bgcolor="#2E2E33" style="width:1px;padding:0;font-size:0;line-height:0;background-color:#2E2E33;">&nbsp;</td>';
     var info = '<td style="padding:0 0 0 24px;vertical-align:middle;">'
       + TABLE+'><tr><td style="padding:0;font-family:'+FONT+';font-size:16px;font-weight:700;letter-spacing:0.01em;line-height:20px;color:#EDEBE4;white-space:nowrap;">'+esc(d.name)+'</td>'+li+'</tr></table>'
       + (d.role ? '<div style="padding:2px 0 0;font-family:'+FONT+';font-size:10px;letter-spacing:0.2em;line-height:15px;text-transform:uppercase;color:#C9B06B;white-space:nowrap;">'+esc(d.role)+'</div>' : '')
-      + mobile
+      + contactLines
       + '</td>';
     var line = '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr>'
       + '<td width="40" height="1" bgcolor="#E0CB8E" style="width:40px;height:1px;font-size:0;line-height:0;background-color:#E0CB8E;">&nbsp;</td>'
@@ -160,15 +187,23 @@
     $('preview').innerHTML = build(true);
     $('copy').disabled = !val('name');
     $('status').textContent = '';
-    var d = {}; fields.forEach(function(k){ d[k] = $('f-'+k).value; });
+    var d = { show:{} };
+    fields.forEach(function(k){ d[k] = $('f-'+k).value; });
+    switches.forEach(function(k){
+      d.show[k] = on(k);
+      document.querySelector('.field[data-k="'+k+'"]').classList.toggle('off', !on(k));
+      var input = $('f-'+k); if (input) input.disabled = !on(k);
+    });
     try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e) {}
   }
 
   fields.forEach(function(k){ $('f-'+k).addEventListener('input', render); });
+  switches.forEach(function(k){ $('s-'+k).addEventListener('change', render); });
 
   $('copy').addEventListener('click', function(){
     var html = build(false);
-    var text = ['name','role','mobile'].map(val).filter(Boolean).join('\n');
+    var text = ['name','role','mobile','email'].filter(function(k){ return k === 'name' || on(k); }).map(val).filter(Boolean)
+      .concat(on('web') ? ['krathveil.com'] : []).join('\n');
     function done(ok){
       $('status').textContent = ok ? 'Copied. Now paste it into Gmail, step 04 below.' : 'Your browser blocked the copy. Open this page in Chrome on a computer and try again.';
     }
