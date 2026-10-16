@@ -13,6 +13,7 @@ GitHub Pages on the `krathveil.com` apex domain (see `CNAME`).
 | --- | --- |
 | `index.html` | The coming-soon page. Self-contained, inline CSS + JS. |
 | `samarth.html` | Founder profile / contact card (linked from the footer). |
+| `signature/` | Email signature generator at https://krathveil.com/signature/. Never rename or move `signature/assets/email/`: every installed Gmail signature loads its images from there. |
 | `krathveil-mark.png` | Transparent wordmark, shown on the OLED hero panel. |
 | `krathveil.svg` | High-resolution vector wordmark (gold on black). |
 | `logo.jpg` | Open Graph / social-share image. |

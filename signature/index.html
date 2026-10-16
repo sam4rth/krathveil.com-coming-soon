@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KrathVeil Email Signature</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0; background:#EFEDE7;}
+  body{font-family:'Space Grotesk',Arial,sans-serif; color:#3A3833; -webkit-font-smoothing:antialiased;}
+  a{color:#8A7440; text-decoration:none;} a:hover{color:#17171B;}
+  .wrap{max-width:1080px; margin:0 auto; padding:48px 24px 96px; display:flex; flex-direction:column; gap:36px;}
+  .head{display:flex; flex-direction:column; gap:8px; padding-bottom:20px; border-bottom:1px solid rgba(23,23,27,.16);}
+  .head img{height:28px; width:auto; align-self:flex-start; margin-bottom:12px;}
+  .kicker{font-size:11px; letter-spacing:.22em; text-transform:uppercase; color:#8A7440;}
+  h1{margin:0; font-weight:700; font-size:32px; line-height:1.05; letter-spacing:-.01em; text-transform:uppercase; color:#17171B;}
+  .lede{margin:4px 0 0; font-size:15px; line-height:1.6; max-width:640px;}
+  .row{display:flex; flex-wrap:wrap; gap:32px; align-items:flex-start;}
+  .col-form{flex:1 1 300px; min-width:0; display:flex; flex-direction:column; gap:16px;}
+  .col-prev{flex:1.3 1 498px; min-width:0; display:flex; flex-direction:column; gap:16px;}
+  label{display:flex; flex-direction:column; gap:6px;}
+  label span{font-size:10px; letter-spacing:.2em; color:#17171B;}
+  label span em{font-style:normal; color:#6F6B60;}
+  input{font-family:inherit; font-size:15px; color:#17171B; padding:11px 12px; border:1px solid rgba(23,23,27,.22); background:#fff; border-radius:0; outline:none;}
+  input:focus{border-color:#8A7440;}
+  input::placeholder{color:#A3A199;}
+  .panel{background:#fff; padding:28px; overflow-x:auto; border:1px solid rgba(23,23,27,.1);}
+  .actions{display:flex; flex-wrap:wrap; align-items:center; gap:14px;}
+  button{font-family:inherit; font-weight:700; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#1B1710; background:#C9B06B; border:0; border-radius:0; padding:14px 22px; cursor:pointer;}
+  button:disabled{opacity:.45; cursor:not-allowed;}
+  @media (hover:hover) and (pointer:fine){ button:not(:disabled):hover{background:#E0CB8E;} }
+  button:not(:disabled):active{background:#B8994F;}
+  button:focus-visible{outline:2px solid #17171B; outline-offset:2px;}
+  .status{font-size:13px; color:#17171B;}
+  .note{margin:0; font-size:12px; line-height:1.55; color:#6F6B60;}
+  .steps{display:flex; flex-direction:column;}
+  .step{display:flex; gap:14px; padding:10px 0; border-bottom:1px solid rgba(23,23,27,.1); font-size:14px; line-height:1.55;}
+  .step:last-child{border-bottom:0;}
+  .step b{font-weight:400; font-size:11px; color:#8A7440; padding-top:2px;}
+  .step strong, p strong{color:#17171B;}
+  .lower{padding-top:8px; border-top:1px solid rgba(23,23,27,.16);}
+  .lower .col-form, .lower .col-prev{padding-top:20px;}
+  p{margin:0; font-size:14px; line-height:1.6;}
+  .block{display:flex; flex-direction:column; gap:8px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <img src="assets/krathveil-wordmark-ink.png" alt="KRATHVEIL">
+    <div class="kicker">Email signature&nbsp;&nbsp;/&nbsp;&nbsp;Gmail&nbsp;&nbsp;/&nbsp;&nbsp;Google Workspace</div>
+    <h1>Signature generator</h1>
+    <p class="lede">Fill in your details, copy the signature, and paste it into Gmail. It takes about two minutes and works on Gmail for the web, iPhone and Android.</p>
+  </div>
+
+  <div class="row">
+    <div class="col-form">
+      <div class="kicker">[ 01 ]&nbsp;&nbsp;Your details</div>
+      <label><span>FULL NAME</span><input id="f-name" autocomplete="name" placeholder="Samarth Alok Srivastava"></label>
+      <label><span>DESIGNATION</span><input id="f-role" autocomplete="organization-title" placeholder="Founder &amp; CEO"></label>
+      <label><span>MOBILE</span><input id="f-mobile" autocomplete="tel" inputmode="tel" placeholder="+91 90049 23362"></label>
+      <label><span>EMAIL</span><input id="f-email" autocomplete="email" inputmode="email" placeholder="name@krathveil.com"></label>
+      <label><span>LINKEDIN URL&nbsp;&nbsp;<em>(LEAVE EMPTY TO HIDE THE ICON)</em></span><input id="f-linkedin" inputmode="url" placeholder="https://www.linkedin.com/in/your-profile/"></label>
+    </div>
+
+    <div class="col-prev">
+      <div class="kicker">[ 02 ]&nbsp;&nbsp;Preview and copy</div>
+      <div class="panel"><div id="preview"></div></div>
+      <div class="actions">
+        <button id="copy" type="button" disabled>Copy signature</button>
+        <span id="status" class="status" aria-live="polite"></span>
+      </div>
+      <p class="note">Fill in at least your name and email to copy. The preview is exactly what gets pasted into Gmail.</p>
+    </div>
+  </div>
+
+  <div class="row lower">
+    <div class="col-form">
+      <div class="kicker">[ 03 ]&nbsp;&nbsp;Install in Gmail</div>
+      <div class="steps">
+        <div class="step"><b>01</b><span>Fill in your details and click <strong>Copy signature</strong>.</span></div>
+        <div class="step"><b>02</b><span>Open Gmail on a computer. Click the gear icon, then <strong>See all settings</strong>.</span></div>
+        <div class="step"><b>03</b><span>On the General tab, scroll to <strong>Signature</strong> and click <strong>Create new</strong>. Name it KrathVeil.</span></div>
+        <div class="step"><b>04</b><span>Click inside the signature box and paste with Ctrl+V or Cmd+V. The black card appears with the logo.</span></div>
+        <div class="step"><b>05</b><span>Under <strong>Signature defaults</strong>, choose KrathVeil for new emails and for replies and forwards.</span></div>
+        <div class="step"><b>06</b><span>Scroll to the bottom of the page and click <strong>Save Changes</strong>.</span></div>
+        <div class="step"><b>07</b><span>Send an email to yourself and open it on your computer and your phone.</span></div>
+      </div>
+    </div>
+    <div class="col-prev" style="gap:20px;">
+      <div class="block">
+        <div class="kicker">[ 04 ]&nbsp;&nbsp;On your phone</div>
+        <p>The Gmail app on iPhone and Android uses your web signature when the app's own mobile signature is empty. Open the Gmail app, go to Settings, choose your account, and make sure <strong>Mobile signature</strong> is off or blank. Nothing else to install.</p>
+      </div>
+      <div class="block">
+        <div class="kicker">[ 05 ]&nbsp;&nbsp;Good to know</div>
+        <p>Write your designation the way it appears on your offer letter, for example Founder &amp; CEO or Systems Engineer. To change anything later, come back to this page, update your details, copy again and replace the signature in Gmail. Do not edit the signature by hand inside Gmail.</p>
+      </div>
+      <div class="block">
+        <div class="kicker">[ 06 ]&nbsp;&nbsp;Problems</div>
+        <p>If the copy button does nothing, use Chrome on a computer. If the logo does not appear in Gmail, click <strong>Display images below</strong> on the email, or copy the signature again from this page. Anything else: <a href="mailto:connect@krathveil.com">connect@krathveil.com</a>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Absolute, canonical URL so the pasted signature works no matter where this page was opened from.
+  var IMG = 'https://krathveil.com/signature/assets/email/';
+  var FONT = "'Space Grotesk',Arial,Helvetica,sans-serif";
+  var $ = function(id){ return document.getElementById(id); };
+  var fields = ['name','role','mobile','email','linkedin'];
+  var KEY = 'krathveil-signature-v1';
+
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || '{}');
+    fields.forEach(function(k){ if (saved[k]) $('f-'+k).value = saved[k]; });
+  } catch(e) {}
+
+  function esc(v){ return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  function val(k){ return $('f-'+k).value.trim(); }
+  function ph(k){ return $('f-'+k).placeholder; }
+
+  function build(usePlaceholders){
+    var d = {};
+    fields.forEach(function(k){ d[k] = val(k) || (usePlaceholders && k !== 'linkedin' ? ph(k) : ''); });
+    var tel = d.mobile.replace(/[^\d+]/g, '');
+    var li = d.linkedin
+      ? '<td width="20" style="padding:0;vertical-align:middle;width:20px;"><a href="'+esc(d.linkedin)+'" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-linkedin.png" width="20" height="20" alt="LinkedIn" style="display:block;width:20px;height:20px;border:0;"></a></td>'
+      : '';
+    function row(label, inner){
+      return '<tr><td style="padding:2px 14px 2px 0;font-family:'+FONT+';font-size:9px;letter-spacing:0.22em;line-height:16px;color:#8A8880;">'+label+'</td><td style="padding:2px 0;font-family:'+FONT+';font-size:12px;line-height:16px;white-space:nowrap;">'+inner+'</td></tr>';
+    }
+    function link(href, text){ return '<a href="'+href+'" style="color:#EDEBE4;text-decoration:none;">'+esc(text)+'</a>'; }
+    var rows = (d.mobile ? row('MOBILE', link('tel:'+tel, d.mobile)) : '')
+      + (d.email ? row('MAIL', link('mailto:'+esc(d.email), d.email)) : '')
+      + row('WEB', link('https://krathveil.com', 'krathveil.com'));
+    return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="440" bgcolor="#0B0B0C" style="border-collapse:collapse;width:440px;max-width:440px;background-color:#0B0B0C;font-family:'+FONT+';"><tr><td bgcolor="#0B0B0C" style="padding:22px 24px 20px;background-color:#0B0B0C;">'
+      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:0;vertical-align:middle;"><a href="https://krathveil.com" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-logo.png" width="160" height="40" alt="KRATHVEIL" style="display:block;width:160px;height:40px;border:0;"></a></td>'+li+'</tr></table>'
+      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:16px 0 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr>'
+      + '<td width="40" height="1" bgcolor="#E0CB8E" style="width:40px;height:1px;font-size:0;line-height:0;background-color:#E0CB8E;">&nbsp;</td>'
+      + '<td width="110" height="1" bgcolor="#6B5C34" style="width:110px;height:1px;font-size:0;line-height:0;background-color:#6B5C34;">&nbsp;</td>'
+      + '<td height="1" bgcolor="#26262A" style="height:1px;font-size:0;line-height:0;background-color:#26262A;">&nbsp;</td>'
+      + '</tr></table></td></tr></table>'
+      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">'
+      + '<tr><td style="padding:16px 0 0;font-family:'+FONT+';font-size:15px;font-weight:700;letter-spacing:0.01em;line-height:20px;color:#EDEBE4;white-space:nowrap;">'+esc(d.name)+'</td></tr>'
+      + (d.role ? '<tr><td style="padding:2px 0 0;font-family:'+FONT+';font-size:10px;letter-spacing:0.2em;line-height:16px;text-transform:uppercase;color:#C9B06B;white-space:nowrap;">'+esc(d.role)+'</td></tr>' : '')
+      + '</table>'
+      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin-top:12px;">'+rows+'</table>'
+      + '</td></tr></table>';
+  }
+
+  function render(){
+    $('preview').innerHTML = build(true);
+    $('copy').disabled = !(val('name') && val('email'));
+    $('status').textContent = '';
+    var d = {}; fields.forEach(function(k){ d[k] = $('f-'+k).value; });
+    try { localStorage.setItem(KEY, JSON.stringify(d)); } catch(e) {}
+  }
+
+  fields.forEach(function(k){ $('f-'+k).addEventListener('input', render); });
+
+  $('copy').addEventListener('click', function(){
+    var html = build(false);
+    var text = ['name','role','mobile','email'].map(val).filter(Boolean).concat('krathveil.com').join('\n');
+    function done(ok){
+      $('status').textContent = ok ? 'Copied. Now paste it into Gmail, step 04 below.' : 'Your browser blocked the copy. Open this page in Chrome on a computer and try again.';
+    }
+    function fallback(){
+      try {
+        var el = document.createElement('div');
+        el.innerHTML = html; el.contentEditable = 'true';
+        el.style.position = 'fixed'; el.style.left = '-10000px'; el.style.top = '0';
+        document.body.appendChild(el);
+        var r = document.createRange(); r.selectNodeContents(el);
+        var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+        var ok = document.execCommand('copy');
+        sel.removeAllRanges(); el.remove(); done(ok);
+      } catch(e) { done(false); }
+    }
+    if (navigator.clipboard && window.ClipboardItem) {
+      navigator.clipboard.write([new ClipboardItem({
+        'text/html': new Blob([html], {type:'text/html'}),
+        'text/plain': new Blob([text], {type:'text/plain'})
+      })]).then(function(){ done(true); }, fallback);
+    } else { fallback(); }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
