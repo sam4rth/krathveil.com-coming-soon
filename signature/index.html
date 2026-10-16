@@ -132,27 +132,27 @@
     fields.forEach(function(k){ d[k] = val(k) || (usePlaceholders && k !== 'linkedin' ? ph(k) : ''); });
     var tel = d.mobile.replace(/[^\d+]/g, '');
     var li = d.linkedin
-      ? '<td width="20" style="padding:0;vertical-align:middle;width:20px;"><a href="'+esc(d.linkedin)+'" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-linkedin.png" width="20" height="20" alt="LinkedIn" style="display:block;width:20px;height:20px;border:0;"></a></td>'
+      ? '<td width="16" style="padding:0;vertical-align:middle;width:16px;"><a href="'+esc(d.linkedin)+'" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-linkedin.png" width="16" height="16" alt="LinkedIn" style="display:block;width:16px;height:16px;border:0;"></a></td>'
       : '';
     function row(label, inner){
-      return '<tr><td style="padding:2px 14px 2px 0;font-family:'+FONT+';font-size:9px;letter-spacing:0.22em;line-height:16px;color:#8A8880;">'+label+'</td><td style="padding:2px 0;font-family:'+FONT+';font-size:12px;line-height:16px;white-space:nowrap;">'+inner+'</td></tr>';
+      return '<tr><td style="padding:1px 10px 1px 0;font-family:'+FONT+';font-size:8px;letter-spacing:0.2em;line-height:14px;color:#8A8880;">'+label+'</td><td style="padding:1px 0;font-family:'+FONT+';font-size:11px;line-height:14px;white-space:nowrap;">'+inner+'</td></tr>';
     }
     function link(href, text){ return '<a href="'+href+'" style="color:#EDEBE4;text-decoration:none;">'+esc(text)+'</a>'; }
     var rows = (d.mobile ? row('MOBILE', link('tel:'+tel, d.mobile)) : '')
       + (d.email ? row('MAIL', link('mailto:'+esc(d.email), d.email)) : '')
       + row('WEB', link('https://krathveil.com', 'krathveil.com'));
-    return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="440" bgcolor="#0B0B0C" style="border-collapse:collapse;width:440px;max-width:440px;background-color:#0B0B0C;font-family:'+FONT+';"><tr><td bgcolor="#0B0B0C" style="padding:22px 24px 20px;background-color:#0B0B0C;">'
-      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:0;vertical-align:middle;"><a href="https://krathveil.com" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-logo.png" width="160" height="40" alt="KRATHVEIL" style="display:block;width:160px;height:40px;border:0;"></a></td>'+li+'</tr></table>'
-      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:16px 0 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr>'
-      + '<td width="40" height="1" bgcolor="#E0CB8E" style="width:40px;height:1px;font-size:0;line-height:0;background-color:#E0CB8E;">&nbsp;</td>'
-      + '<td width="110" height="1" bgcolor="#6B5C34" style="width:110px;height:1px;font-size:0;line-height:0;background-color:#6B5C34;">&nbsp;</td>'
+    return '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="320" bgcolor="#0B0B0C" style="border-collapse:collapse;width:320px;max-width:320px;background-color:#0B0B0C;font-family:'+FONT+';"><tr><td bgcolor="#0B0B0C" style="padding:14px 16px 13px;background-color:#0B0B0C;">'
+      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:0;vertical-align:middle;"><a href="https://krathveil.com" style="text-decoration:none;"><img src="'+IMG+'krathveil-sig-logo.png" width="112" height="28" alt="KRATHVEIL" style="display:block;width:112px;height:28px;border:0;"></a></td>'+li+'</tr></table>'
+      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr><td style="padding:11px 0 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;width:100%;"><tr>'
+      + '<td width="28" height="1" bgcolor="#E0CB8E" style="width:28px;height:1px;font-size:0;line-height:0;background-color:#E0CB8E;">&nbsp;</td>'
+      + '<td width="80" height="1" bgcolor="#6B5C34" style="width:80px;height:1px;font-size:0;line-height:0;background-color:#6B5C34;">&nbsp;</td>'
       + '<td height="1" bgcolor="#26262A" style="height:1px;font-size:0;line-height:0;background-color:#26262A;">&nbsp;</td>'
       + '</tr></table></td></tr></table>'
       + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;">'
-      + '<tr><td style="padding:16px 0 0;font-family:'+FONT+';font-size:15px;font-weight:700;letter-spacing:0.01em;line-height:20px;color:#EDEBE4;white-space:nowrap;">'+esc(d.name)+'</td></tr>'
-      + (d.role ? '<tr><td style="padding:2px 0 0;font-family:'+FONT+';font-size:10px;letter-spacing:0.2em;line-height:16px;text-transform:uppercase;color:#C9B06B;white-space:nowrap;">'+esc(d.role)+'</td></tr>' : '')
+      + '<tr><td style="padding:11px 0 0;font-family:'+FONT+';font-size:13px;font-weight:700;letter-spacing:0.01em;line-height:17px;color:#EDEBE4;white-space:nowrap;">'+esc(d.name)+'</td></tr>'
+      + (d.role ? '<tr><td style="padding:1px 0 0;font-family:'+FONT+';font-size:9px;letter-spacing:0.18em;line-height:13px;text-transform:uppercase;color:#C9B06B;white-space:nowrap;">'+esc(d.role)+'</td></tr>' : '')
       + '</table>'
-      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin-top:12px;">'+rows+'</table>'
+      + '<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;margin-top:8px;">'+rows+'</table>'
       + '</td></tr></table>';
   }
 
